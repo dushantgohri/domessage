@@ -73,7 +73,7 @@ Rails.application.configure do
   s3_credentials: {
     bucket: ENV.fetch('S3_BUCKET'),
     access_key_id: ENV.fetch('S3_ACCESS_KEY'),
-    secret_access_key: ENV.fetch('S3_SECRETKEY'),
+    secret_access_key: ENV.fetch('S3_SECRET_KEY'),
   }
 }
 	ActionMailer::Base.smtp_settings	=	{ :address	=>	'smtp.sendgrid.net',	
