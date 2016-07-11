@@ -67,15 +67,16 @@ Rails.application.configure do
 	host	=	'domessage.herokuapp.com'	
 	config.action_mailer.default_url_options	=	{	host:	host	}		
 	
-	
-	config.paperclip_defaults = {
-  storage: :s3,
-  s3_credentials: {
-    bucket: ENV.fetch('S3_BUCKET'),
-    access_key_id: ENV.fetch('S3_ACCESS_KEY'),
-    secret_access_key: ENV.fetch('S3_SECRET_KEY'),
+   CarrierWave.configure do |config|
+  config.fog_credentials = {
+      :provider               => 'AWS',
+      :aws_access_key_id      => "S3_ACCESS_KEY",
+      :aws_secret_access_key  => "S3_SECRET_KEY",
+      :region                 => 'us-west-2'
+      # Change this for different AWS region. Default is 'us-east-1'
   }
-}
+  config.fog_directory  = "S3_BUCKET"
+end
 	ActionMailer::Base.smtp_settings	=	{ :address	=>	'smtp.sendgrid.net',	
 		                                      :port	=>	'587',
 		                                      :authentication	=>	:plain,		
